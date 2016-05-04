@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lyI-M0-W7c">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -85,7 +86,7 @@
                                         </constraints>
                                         <state key="normal" image="settings"/>
                                         <connections>
-                                            <segue destination="vB0-kV-JrY" kind="show" id="T7m-Lo-J0v"/>
+                                            <segue destination="vB0-kV-JrY" kind="show" identifier="goToSettings" id="T7m-Lo-J0v"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -126,9 +127,61 @@
                     <view key="view" contentMode="scaleToFill" id="XiM-Yt-u0t">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brush Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lb-nf-v3u">
+                                <rect key="frame" x="20" y="96" width="82" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="1AK-Hm-OcE"/>
+                                    <constraint firstAttribute="width" constant="82" id="WOi-T7-JYc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="AXg-Da-L21">
+                                <rect key="frame" x="18" y="133" width="564" height="31"/>
+                                <connections>
+                                    <action selector="changeBrushSize:" destination="vB0-kV-JrY" eventType="valueChanged" id="agw-Kr-tCq"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oda-yR-w3D">
+                                <rect key="frame" x="110" y="96" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3N-c3-K2l">
+                                <rect key="frame" x="268" y="213" width="65" height="30"/>
+                                <state key="normal" title="Share Art"/>
+                                <connections>
+                                    <action selector="sharePressed:" destination="vB0-kV-JrY" eventType="touchUpInside" id="2Hh-5C-OBF"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AXg-Da-L21" firstAttribute="trailing" secondItem="XiM-Yt-u0t" secondAttribute="trailingMargin" id="5nJ-FH-IrN"/>
+                            <constraint firstItem="N3N-c3-K2l" firstAttribute="top" secondItem="AXg-Da-L21" secondAttribute="bottom" constant="50" id="6h7-EJ-SO9"/>
+                            <constraint firstItem="AXg-Da-L21" firstAttribute="top" secondItem="7lb-nf-v3u" secondAttribute="bottom" constant="16" id="RW6-Um-0lh"/>
+                            <constraint firstItem="7lb-nf-v3u" firstAttribute="top" secondItem="uzw-un-fce" secondAttribute="bottom" constant="32" id="TD8-vz-aUa"/>
+                            <constraint firstItem="N3N-c3-K2l" firstAttribute="centerX" secondItem="XiM-Yt-u0t" secondAttribute="centerX" id="dHN-hV-Z2j"/>
+                            <constraint firstItem="oda-yR-w3D" firstAttribute="top" secondItem="uzw-un-fce" secondAttribute="bottom" constant="32" id="gXM-zJ-zRM"/>
+                            <constraint firstItem="AXg-Da-L21" firstAttribute="leading" secondItem="XiM-Yt-u0t" secondAttribute="leadingMargin" id="iG2-oP-CCr"/>
+                            <constraint firstItem="7lb-nf-v3u" firstAttribute="leading" secondItem="XiM-Yt-u0t" secondAttribute="leadingMargin" id="jPP-ly-Wr5"/>
+                            <constraint firstItem="oda-yR-w3D" firstAttribute="leading" secondItem="7lb-nf-v3u" secondAttribute="trailing" constant="8" id="zdz-2z-ivf"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Settings" id="EUr-CD-qe2"/>
+                    <navigationItem key="navigationItem" title="Settings" id="EUr-CD-qe2">
+                        <barButtonItem key="rightBarButtonItem" title="Erase" id="4tg-nI-rms">
+                            <connections>
+                                <action selector="erasePressed:" destination="vB0-kV-JrY" id="xne-2U-Hjc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="brushLabel" destination="oda-yR-w3D" id="wtO-QP-b1N"/>
+                        <outlet property="slider" destination="AXg-Da-L21" id="nkV-kK-liO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eOl-G9-sxe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
